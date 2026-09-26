@@ -1,0 +1,2 @@
+# Run every night at 02:15 on a headless Linux server and keep a log per run.
+15 2 * * * cd /opt/pw-harvest && .venv/bin/python harvest.py --out output/$(date +\%F) >> output/cron.log 2>&1

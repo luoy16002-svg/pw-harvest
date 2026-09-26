@@ -1,0 +1,36 @@
+# Each case is one documented journey. Selectors are plain CSS; "css@attr" reads an attribute.
+# The demo targets toscrape.com, a sandbox built for scraping practice.
+cases:
+  books:                       # classic pagination + product images
+    start_url: https://books.toscrape.com/catalogue/page-1.html
+    item: article.product_pod
+    fields:
+      title: h3 a@title
+      price: .price_color
+      availability: .availability
+      rating: p.star-rating@class
+      url: h3 a@href
+      image: img@src
+    next: li.next a
+    image_field: image
+    max_pages: 50
+
+  quotes_js:                   # content rendered by JavaScript after load
+    start_url: https://quotes.toscrape.com/js/
+    item: div.quote
+    wait_for: div.quote span.text
+    fields:
+      text: span.text
+      author: small.author
+      tags: div.tags
+    next: li.next a
+    max_pages: 10
+
+  quotes_scroll:               # infinite scroll, no pagination links
+    start_url: https://quotes.toscrape.com/scroll
+    item: div.quote
+    fields:
+      text: span.text
+      author: small.author
+    scroll: true
+    max_pages: 1
